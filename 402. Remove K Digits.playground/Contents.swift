@@ -1,7 +1,7 @@
 class Solution {
     func removeKdigits(_ num: String, _ k: Int) -> String {
         let list = Array(num).map { "\($0)" }
-        var stack = Stack(storage: list)
+        var stack = Storage(storage: list)
         var selectedNumber = stack.count - k
         var results: String = ""
 
@@ -23,7 +23,7 @@ class Solution {
     }
 }
 
-struct Stack {
+struct Storage {
     private var storage: [String]
 
     init(storage: [String]) {
