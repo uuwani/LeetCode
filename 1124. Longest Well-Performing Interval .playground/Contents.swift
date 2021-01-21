@@ -45,3 +45,5 @@ class Solution {
 
 let solution = Solution()
 print(solution.longestWPI([6,6,6,9,6,6,6,6,9,9,9,9,6,6,6,6,6,9]))
+
+//Fail
