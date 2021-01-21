@@ -67,55 +67,55 @@ print(solution.sumSubarrayMins([36,84,26,57,2,75,34,5,29,25]))
 
 //MARK: - Version1
 
-/*class Solution {
- func sumSubarrayMins(_ arr: [Int]) -> Int {
-     let moduloNumber = 1000000000 + 7
-     var mininumSum = 0
-     var newArray = arr
+class Solution2 {
+    func sumSubarrayMins(_ arr: [Int]) -> Int {
+        let moduloNumber = 1000000000 + 7
+        var mininumSum = 0
+        var newArray = arr
 
-     while !newArray.isEmpty {
-         var oldValue: Int?
-         var tempArray: [Int] = []
-         for index in 0..<newArray.count {
-             mininumSum += newArray[index]
-             if index < newArray.count - 1 {
-                 let mininum = min(newArray[index], newArray[index + 1])
-                 mininumSum += mininum
+        while !newArray.isEmpty {
+            var oldValue: Int?
+            var tempArray: [Int] = []
+            for index in 0..<newArray.count {
+                mininumSum += newArray[index]
+                if index < newArray.count - 1 {
+                    let mininum = min(newArray[index], newArray[index + 1])
+                    mininumSum += mininum
 
-                 if let value = oldValue {
-                    tempArray.append(value >= mininum ? mininum : value)
-                 }
-                 oldValue = mininum
-             }
-         }
-         newArray = tempArray
-     }
+                    if let value = oldValue {
+                        tempArray.append(value >= mininum ? mininum : value)
+                    }
+                    oldValue = mininum
+                }
+            }
+            newArray = tempArray
+        }
 
-     return mininumSum % moduloNumber
- }
-}*/
+        return mininumSum % moduloNumber
+    }
+}
 
 //MARK: - Version2
-/*
- class Solution {
-     func sumSubarrayMins(_ arr: [Int]) -> Int {
-         let moduloNumber = 1000000000 + 7
-         var mininumSum = 0
-         var newArray = arr
 
-         while !newArray.isEmpty {
-             var tempArray: [Int] = []
-             for index in 0..<newArray.count {
-                 mininumSum += newArray[index]
-                 if index < newArray.count - 1 {
-                     let mininum = min(newArray[index], newArray[index + 1])
-                     tempArray.append(mininum)
-                 }
-             }
-             newArray = tempArray
-         }
+class Solution3 {
+    func sumSubarrayMins(_ arr: [Int]) -> Int {
+        let moduloNumber = 1000000000 + 7
+        var mininumSum = 0
+        var newArray = arr
 
-         return mininumSum % moduloNumber
-     }
- }
-*/
+        while !newArray.isEmpty {
+            var tempArray: [Int] = []
+            for index in 0..<newArray.count {
+                mininumSum += newArray[index]
+                if index < newArray.count - 1 {
+                    let mininum = min(newArray[index], newArray[index + 1])
+                    tempArray.append(mininum)
+                }
+            }
+            newArray = tempArray
+        }
+
+        return mininumSum % moduloNumber
+    }
+}
+
