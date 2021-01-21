@@ -50,3 +50,4 @@ let solution = Solution()
 solution.find132pattern([26,26,26,26,36,36,36,36,36,36,36,16,16,16,16,16,16])
 //solution.find132pattern([1,2,3,4])
 //solution.find132pattern([-1,3,2,0])
+//Fail
