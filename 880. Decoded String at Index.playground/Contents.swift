@@ -72,3 +72,5 @@ class Solution {
 
 let solution = Solution()
 print(solution.decodeAtIndex("leet2code3", 10))
+
+//Fail
