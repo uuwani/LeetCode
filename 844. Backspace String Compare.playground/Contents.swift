@@ -49,3 +49,5 @@ solution.backspaceCompare("ab#c", "ad#c")
 solution.backspaceCompare("a##c", "#a#c")
 solution.backspaceCompare("a#c", "b")
 
+//Success
+
