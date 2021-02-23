@@ -33,3 +33,23 @@ class Solution {
         return (slow, fast)
     }
 }
+
+class Solution2 {
+    func oddEvenList(_ head: ListNode?) -> ListNode? {
+
+        let evenHead = head?.next
+        var odd = head
+        var even = head?.next
+
+        while even?.next != nil {
+            odd?.next = even?.next
+            odd = odd?.next
+            even?.next = odd?.next
+            even = even?.next
+        }
+
+        odd?.next = evenHead
+
+        return head
+    }
+}
