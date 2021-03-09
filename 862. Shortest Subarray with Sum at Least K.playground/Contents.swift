@@ -6,48 +6,81 @@ class Solution {
     func shortestSubarray(_ A: [Int], _ K: Int) -> Int {
         self.minLength = A.count + 1
         self.number = K
-        var queue: [Int] = []
-        var head: ListNode = ListNode()
-        var current: ListNode? = head
+        var stack: [Int] = []
+        var notZero = 0
+        var isNotZero = false
 
         for element in A {
-            current?.next = ListNode(element)
-            current = current?.next
-        }
+            notZero += element
+            notZero = notZero > 0 ? notZero : 0
+            if notZero > 0 {
+                stack.append(element)
+            } else {
+                stack = []
+            }
 
-        check(head.next!.val, 1, head.next!)
+            if notZero >= self.number {
+                if isNotZero {
+                    print("hhhhellllo", element)
+                    let (newStack, sum) = check(notZero, stack)
+                    stack = newStack
+                    notZero = sum
+                    print(stack, notZero)
+                } else {
+                    print("Hey", element)
+                    let (newStack, sum) = check1(stack)
+                    stack = newStack
+                    notZero = sum
+                    print(stack, notZero)
+                }
+                isNotZero = true
+            } else {
+                isNotZero = false
+            }
+        }
         
         return self.minLength == A.count + 1 ? -1 : self.minLength
     }
 
-    func check(_ sum: Int, _ length: Int, _ current: ListNode) {
-        // K을 넘으면 바로 아웃. --> K를 넘더라도 나중에 다시 회복될 여지가 있긴함 이건 우짬?
-        // 최상위 min값을 넘어도 아웃. --> 이건 더이상 볼 필요 없음.
-        // 아웃되면 -1을 뱉어내고 퇴장.
-        // 우짜지???
+    func check(_ notZero: Int, _ stack: [Int]) -> ([Int], Int) {
+        var stack = stack
+        var sum = notZero
 
-        if length >= self.minLength {
-            guard let next = current.next else { return }
-            check(next.val, 1, next)
-
-        } else {
-            if sum >= number {
-                self.minLength = self.minLength > length ? length : self.minLength
+        while !stack.isEmpty {
+            let first = stack.first!
+            if sum - first < self.number {
+                break
             }
-            guard let next = current.next else { return }
-            check(sum + next.val, length + 1, next)
-            check(next.val, 1, next)
+            sum -= first
+            stack.removeFirst()
         }
 
-        return
+        if stack.count < self.minLength {
+            self.minLength = stack.count
+        }
+
+        return (stack, sum)
     }
 
-    public class ListNode {
-        public var val: Int
-        public var next: ListNode?
-        public init() { self.val = 0; self.next = nil; }
-        public init(_ val: Int) { self.val = val; self.next = nil; }
-        public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+    func check1(_ stack: [Int]) -> ([Int], Int) {
+        var stack = stack
+        var length = 0
+        var result: [Int] = []
+        var sum = 0
+        while !stack.isEmpty {
+            let last = stack.popLast()!
+            result.append(last)
+            sum += last
+            length += 1
+            if sum >= self.number {
+                if length < self.minLength {
+                    self.minLength = length
+                }
+                break
+            }
+        }
+
+        return (result.reversed(), sum)
     }
 }
 
