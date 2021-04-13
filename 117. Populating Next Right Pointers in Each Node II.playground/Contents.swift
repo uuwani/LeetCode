@@ -38,3 +38,34 @@ class Solution {
         return root
     }
 }
+
+class Solution_ {
+    func connect(_ root: Node?) -> Node? {
+
+        var firstNode: Node? = root
+
+        while firstNode != nil {
+            var current: Node? = firstNode
+            firstNode = nil
+
+            var lastNode: Node? = nil
+            while current != nil {
+                let leftNode = current?.left
+                let rightNode = current?.right
+
+                if firstNode == nil {
+                    firstNode = leftNode != nil ? leftNode : rightNode
+                }
+
+                lastNode?.next = leftNode != nil ? leftNode : rightNode
+                leftNode?.next = rightNode
+                let tempNode = rightNode != nil ? rightNode : leftNode
+                lastNode = tempNode == nil ? lastNode : tempNode
+                
+                current = current?.next
+            }
+        }
+
+        return root
+    }
+}
